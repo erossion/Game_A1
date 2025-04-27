@@ -27,16 +27,13 @@ public class SnakeGame extends GameEngine {
             }
         });
     }
-    // 初始化游戏
     @Override
     public void init() {
-        // 加载图像资源
         headRed = loadImage("resources/head.png");
         bodyGreen = loadImage("resources/dot.png");
         appleImage = loadImage("resources/apple.png");
     }
 
-    // 生成食物
     private void spawnFood() {
         do {
             food = new Point(rand.nextInt(GRID_SIZE), rand.nextInt(GRID_SIZE));
@@ -52,7 +49,6 @@ public class SnakeGame extends GameEngine {
         return false;
     }
 
-    // 更新游戏状态
     @Override
     public void update(double dt) {
         if (state == GameState.PLAYING_SINGLE) {
@@ -81,12 +77,11 @@ public class SnakeGame extends GameEngine {
 
     private void checkFoodCollision(Snake player) {
         if (player.getHead().x == food.x && player.getHead().y == food.y) {
-            player.length++; // 正确增长长度
+            player.length++;
             spawnFood();
         }
     }
 
-    // 处理玩家1输入 (WASD)
     private void handlePlayerInput(Snake player) {
         if (keys['W'] && player.direction != 1) {
             player.direction = 0;
@@ -105,7 +100,6 @@ public class SnakeGame extends GameEngine {
             player.isMoving = true;
         }
     }
-    // 处理玩家2输入 (箭头键)
     private void handlePlayer2Input(Snake player) {
         if (keys[KeyEvent.VK_UP] && player.direction != 1) {
             player.direction = 0;
@@ -129,7 +123,6 @@ public class SnakeGame extends GameEngine {
         return keys[keyCode];
     }
 
-    // 绘制游戏画面
     @Override
     public void paintComponent() {
         changeBackgroundColor(Color.BLACK);
@@ -162,7 +155,6 @@ public class SnakeGame extends GameEngine {
     }
 
 
-    // 绘制蛇
     private void drawSnake(Snake snake) {
         for (int i = 0; i < snake.body.size(); i++) {
             Point p = snake.body.get(i);
@@ -189,7 +181,6 @@ public class SnakeGame extends GameEngine {
         drawText(width() / 2 - 80, height() / 2 + 80, "Press 'R' to start over", "Arial", 20);
     }
 
-    // 处理键盘事件
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
@@ -217,7 +208,6 @@ public class SnakeGame extends GameEngine {
         keys[key] = false;
     }
 
-    // 重置时重新加载图像（可选，根据资源管理需求）
     private void resetGame() {
         if (state == GameState.PLAYING_SINGLE) {
             player1 = new Snake(headRed, bodyGreen, 10, 10);
@@ -232,6 +222,6 @@ public class SnakeGame extends GameEngine {
 
     public static void main(String[] args) {
         SnakeGame game = new SnakeGame();
-        GameEngine.createGame(game, 10); // 10 FPS控制速度
+        GameEngine.createGame(game, 10);
     }
 }

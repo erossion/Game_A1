@@ -4,7 +4,7 @@ import java.util.List;
 
 class Snake {
     List<Point> body;
-    int direction; // 0:上, 1:下, 2:左, 3:右
+    int direction;
     Image headImage,bodyImage;
     int speed;
     boolean isMoving;
@@ -18,7 +18,7 @@ class Snake {
         length = 3;
         headImage = head;
         bodyImage = body;
-        direction = 3; // 初始向右
+        direction = 3;
         speed = 100;
         isMoving = false;
     }
